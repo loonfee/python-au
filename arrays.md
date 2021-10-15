@@ -1,12 +1,16 @@
-# Arrays
+## Two Sum
 
-+ [String Compression](#string-compression)
-
-## String-compression
-
-https://leetcode.com/problems/string-compression/
+https://leetcode.com/problems/two-sum/
 
 ```python
-
+class Solution(object):
+    def twoSum(self, nums, target):
+        previous_nums = {}
+        for index, num in enumerate(nums):
+            diff = target - num
+            if(diff in previous_nums):
+                return index, previous_nums[diff]
+            previous_nums[num] = index
 
 ```
+
