@@ -1,0 +1,10 @@
+Two Sum
+https://leetcode.com/problems/two-sum/
+class Solution(object):
+    def twoSum(self, nums, target):
+        previous_nums = {}
+        for index, num in enumerate(nums):
+            diff = target - num
+            if(diff in previous_nums):
+                return index, previous_nums[diff]
+            previous_nums[num] = index
