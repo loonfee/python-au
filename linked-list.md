@@ -1,0 +1,76 @@
+# Linked List
+
++ [Merge Two Sorted Lists](#merge-two-sorted-lists)
+##
+## Merge Two Sorted Lists
+
+https://leetcode.com/problems/merge-two-sorted-lists/
+
+<details><summary>Test cases</summary><blockquote>
+
+```python
+import unittest
+from solution import Solution
+from solution import ListNode
+
+class TestMergeTwoSortedLists(unittest.TestCase):
+    def test_mergeTwoLists(self):
+        l1 = ListNode.create_linked_list(self, [1, 3, 7])
+        l2 = ListNode.create_linked_list(self, [2, 3, 5, 6])
+        expected = ListNode.create_linked_list(self, [1, 2, 3, 3, 5, 6, 7])
+        result = Solution.mergeTwoLists(self, l1, l2)
+        self.assertEqual(ListNode.get_values(self, expected), ListNode.get_values(self, result))
+
+
+if __name__ == '__main__':
+    unittest.main()
+```
+</blockuote></details>
+
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+    def get_values(self, head):
+        res = []
+        cur = head
+        while cur:
+            res.append(cur.val)
+            cur = cur.next
+        return res
+
+
+    def create_linked_list(self, data):
+        nxt = None
+        for i in range(1, len(data) + 1):
+            cur = ListNode(data[-i], nxt)
+            nxt = cur
+        return cur
+
+class Solution:
+    def mergeTwoLists(self, l1, l2):
+        waste = ListNode()
+        tail = waste
+        while l1 and l2:
+            if l1.val < l2.val:
+                tail.next = l1
+                l1 = l1.next
+            else:
+                tail.next = l2
+                l2 = l2.next
+            tail = tail.next
+        if l1:
+            tail.next = l1
+        elif l2:
+            tail.next = l2
+        return waste.next
+
+
+
+
+
+
+```

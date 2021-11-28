@@ -1,12 +1,45 @@
-Two Sum
-https://leetcode.com/problems/two-sum/
-class Solution(object):
-    def twoSum(self, nums, target):
-        previous_nums = {}
-        for index, num in enumerate(nums):
-            diff = target - num
-            if(diff in previous_nums):
-                return index, previous_nums[diff]
-            previous_nums[num] = index
+Merge Two Sorted Lists
+https://leetcode.com/problems/merge-two-sorted-lists/
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+    def get_values(self, head):
+        res = []
+        cur = head
+        while cur:
+            res.append(cur.val)
+            cur = cur.next
+        return res
+
+
+    def create_linked_list(self, data):
+        nxt = None
+        for i in range(1, len(data) + 1):
+            cur = ListNode(data[-i], nxt)
+            nxt = cur
+        return cur
+
+class Solution:
+    def mergeTwoLists(self, l1, l2):
+        waste = ListNode()
+        tail = waste
+        while l1 and l2:
+            if l1.val < l2.val:
+                tail.next = l1
+                l1 = l1.next
+            else:
+                tail.next = l2
+                l2 = l2.next
+            tail = tail.next
+        if l1:
+            tail.next = l1
+        elif l2:
+            tail.next = l2
+        return waste.next
+
+
 
 
