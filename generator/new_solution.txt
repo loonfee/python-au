@@ -1,12 +1,33 @@
-Two Sum
-https://leetcode.com/problems/two-sum/
-class Solution(object):
-    def twoSum(self, nums, target):
-        previous_nums = {}
-        for index, num in enumerate(nums):
-            diff = target - num
-            if(diff in previous_nums):
-                return index, previous_nums[diff]
-            previous_nums[num] = index
+Middle of the Linked List
+https://leetcode.com/problems/middle-of-the-linked-list/
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+    def get_values(self, head):
+        res = []
+        cur = head
+        while cur:
+            res.append(cur.val)
+            cur = cur.next
+        return res
+
+
+    def create_linked_list(self, head_val, tail_val):
+        nxt = ListNode(tail_val)
+        for i in range(tail_val - 1, head_val - 1, -1):
+            cur = ListNode(i, nxt)
+            nxt = cur
+        return cur
+
+
+class Solution:
+    def middleNode(self, head):
+        arr = [head]
+        while arr[-1].next:
+            arr.append(arr[-1].next)
+        return arr[len(arr)//2]
 
 
