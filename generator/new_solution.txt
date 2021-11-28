@@ -1,12 +1,23 @@
-Two Sum
-https://leetcode.com/problems/two-sum/
-class Solution(object):
-    def twoSum(self, nums, target):
-        previous_nums = {}
-        for index, num in enumerate(nums):
-            diff = target - num
-            if(diff in previous_nums):
-                return index, previous_nums[diff]
-            previous_nums[num] = index
-
+Reverse Linked List
+https://leetcode.com/problems/reverse-linked-list/
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+    def get_values(self, head):
+        res = []
+        cur = head
+        while cur:
+            res.append(cur.val)
+            cur = cur.next
+        return res
+class Solution:
+    def reverseList(self, head):
+        prev, cur = None, head
+        while cur:
+            nxt = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nxt
+        return prev
 
