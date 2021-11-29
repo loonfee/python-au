@@ -1,0 +1,60 @@
+
++ [Sort List](#sort-list)
+##
+## Sort List
+
+https://leetcode.com/problems/sort-list/
+
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+    def get_values(self, head):
+        res = []
+        cur = head
+        while cur:
+            res.append(cur.val)
+            cur = cur.next
+        return res
+    def create_linked_list(self, data):
+        nxt = None
+        for i in range(1, len(data) + 1):
+            cur = ListNode(data[-i], nxt)
+            nxt = cur
+        return cur
+
+class Solution:
+    def sortList(self, head):
+        if head == None or head.next == None:
+            return head
+        slow = fast = prev = head
+        while fast and fast.next:
+            prev = slow
+            fast = fast.next.next
+            slow = slow.next
+        prev.next = None
+        l = Solution.sortList(self, head)
+        r = Solution.sortList(self, slow)
+        return Solution.merge_lists(self, l, r)
+    def merge_lists(self, l1, l2):
+        dummy = ListNode
+        tail = dummy
+        while l1 and l2:
+            if l1.val < l2.val:
+                tail.next = l1
+                l1 = l1.next
+            else:
+                tail.next = l2
+                l2 = l2.next
+            tail = tail.next
+        if l1:
+            tail.next = l1
+        if l2:
+            tail.next = l2
+        return dummy.next
+
+
+
+
+```
